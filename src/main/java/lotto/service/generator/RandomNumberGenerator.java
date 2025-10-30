@@ -12,6 +12,10 @@ public class RandomNumberGenerator {
     private RandomNumberGenerator() {}
 
     public static List<Integer> generate(int count) {
-        return Randoms.pickUniqueNumbersInRange(DEFAULT_LOTTO_START, DEFAULT_LOTTO_END, count);
+        try {
+            return Randoms.pickUniqueNumbersInRange(DEFAULT_LOTTO_START, DEFAULT_LOTTO_END, count);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 }
