@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RandomNumberGeneratorTest {
 
@@ -30,5 +30,12 @@ class RandomNumberGeneratorTest {
     void generateNotDuplicateTest() {
         List<Integer> generate = RandomNumberGenerator.generate(6);
         assertThat(generate.stream().distinct().count()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("숫자 범위보다 입력된 숫자가 크면 예외")
+    void generateExceptionTest() {
+        assertThatThrownBy(() -> RandomNumberGenerator.generate(46))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
