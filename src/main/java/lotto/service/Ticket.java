@@ -1,31 +1,30 @@
 package lotto.service;
 
 import lotto.Lotto;
+import lotto.service.utils.LimitedList;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Ticket {
     private static final String GREATER_THAN_ORDER = "[ERROR] 구매한 갯수보다 많습니다. 갯수 : ";
     private static final int MINIMUM_PRIZE = 3;
-    private final Game[] games;
-    private int head;
+    private final LimitedList<Game> games;
 
-    public Ticket(int number) {
-        games = new Game[number];
-        head = 0;
+    public Ticket(int order) {
+        games = new LimitedList<>(order);
     }
 
     public void addGame(Game game) {
-        if (head >= games.length) {
-            //이 경우 재시작이 아니라 그냥 넘어가도록 구현 해야함
-            throw new IllegalArgumentException(GREATER_THAN_ORDER + games.length);
+
+        try {
+            games.addElement(game);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(GREATER_THAN_ORDER + games.limit(), e);
         }
-        games[head++] = game;
     }
 
     public List<Game> getGames() {
-        return Arrays.stream(games).toList();
+        return games.getList();
     }
 
 

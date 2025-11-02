@@ -30,6 +30,10 @@ class TicketTest {
 
         assertThatThrownBy(() -> ticket.addGame(game)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구매한 갯수보다 많습니다.");
+
+//                .extracting(Throwable::getCause)
+//                .hasFieldOrPropertyWithValue("message","허용량 초과");
+        //하위 예외를 테스트 하고싶은데 안됨
     }
 
     @Test
@@ -53,7 +57,7 @@ class TicketTest {
         ticket.addGame(game2);
         ticket.addGame(game3);
 
-        assertThat(ticket.filterValuable(new Lotto(List.of(1,2,3,4,5,6))).size()).isEqualTo(2);
+        assertThat(ticket.filterValuable(new Lotto(List.of(1, 2, 3, 4, 5, 6))).size()).isEqualTo(2);
     }
 
 }
