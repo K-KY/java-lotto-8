@@ -25,4 +25,8 @@ public class ListMap<T,Y> {
         }
         throw new IllegalArgumentException(KEY_NOT_FOUND);
     }
+
+    public boolean hasKey(T key) {
+        return store.containsKey(key);
+    }
 }
