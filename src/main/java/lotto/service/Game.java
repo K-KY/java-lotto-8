@@ -18,4 +18,9 @@ public class Game {
     public int numberOfContains(Lotto lotto) {
         return (int) numbers.stream().filter(lotto::contains).count();
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
